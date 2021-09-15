@@ -2,6 +2,7 @@ import smtplib, ssl
 import yaml
 import os
 from experiments.data_acq_test import get_results
+from datetime import datetime
 
 if not os.environ.get("EMAIL_PASSWORD"):
     with open('config.yaml') as config_file:
@@ -11,6 +12,7 @@ if not os.environ.get("EMAIL_PASSWORD"):
 
 
 def email_sender():
+    print(datetime.now())
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "ld.app.testing@gmail.com"  # Enter your address
