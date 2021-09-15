@@ -1,26 +1,21 @@
-from subprocess import call
-
-import time
-import os
+from time import sleep
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
+from experiments.email_test import email_sender
 
-def job():
-    print("In job")
-
-
-if __name__ == '__main__':
+def main_fn():
     scheduler = BackgroundScheduler()
-    scheduler.configure(timezone='utc')
-    scheduler.add_job(job, 'interval', seconds=10)
     scheduler.start()
-    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
-    try:
-        # This is here to simulate application activity (which keeps the main thread alive).
-        while True:
-            time.sleep(5)
-    except (KeyboardInterrupt, SystemExit):
-        # Not strictly necessary if daemonic mode is enabled but should be done if possible
-        scheduler.shutdown()
+    trigger = CronTrigger(
+        second="0,30"
+    )
+    scheduler.add_job(
+        email_sender,
+        trigger=trigger,
+        name="daily foo",
+    )
+    while True:
+        sleep(5)
