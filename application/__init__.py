@@ -1,7 +1,8 @@
 # application/__init__.py
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, json, jsonify, request
 from experiments.cron_jobs_test import main_fn
 from threading import Thread
+from datetime import datetime
 
 
 def create_app(test_config=None):
@@ -19,6 +20,11 @@ def create_app(test_config=None):
     @app.route('/')
     def home():
         return jsonify({'message': 'healthy'}), 200
+
+
+    @app.route('/time')
+    def print_time():
+        return jsonify({'time': datetime.now()})
 
     thread = Thread(target=main_fn)
     thread.daemon = True
