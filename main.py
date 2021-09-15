@@ -1,5 +1,5 @@
-from experiments.cron_jobs_test import main
+from experiments.email_test import email_sender
 
 
 if __name__ == "__main__":
-    main()
+    email_sender()
