@@ -1,0 +1,8 @@
+name: CI/CD Pipeline for Bike Service Monitor
+on: [push]
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Empty job"
+    
