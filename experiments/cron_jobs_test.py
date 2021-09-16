@@ -13,7 +13,7 @@ def main_fn():
         hour="17", minute="55", second="0", timezone="US/Pacific"
     )
     trigger2 = CronTrigger(
-        hour="20", minute="43", second="0", timezone="US/Pacific"
+        hour="6", minute="22", second="0", timezone="US/Pacific"
     )
     scheduler.add_job(
         email_sender,
