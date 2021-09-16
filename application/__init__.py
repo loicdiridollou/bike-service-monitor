@@ -4,6 +4,7 @@ from flask import Flask, abort, json, jsonify, request
 from experiments.cron_jobs_test import main_fn
 from threading import Thread
 from datetime import datetime
+import os
 
 
 def create_app(test_config=None):
@@ -27,6 +28,11 @@ def create_app(test_config=None):
     def print_time():
         return jsonify({'time': datetime.now()}), 200
 
+
+    @app.route('/var')
+    def print_var():
+        return jsonify({"debug": app.debug,
+                        'os_env': os.environ.get('WERKZEUG_RUN_MAIN')})
     
     @app.route('/email')
     def send_email():
