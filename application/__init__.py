@@ -1,4 +1,5 @@
 # application/__init__.py
+from experiments.email_test import email_sender
 from flask import Flask, abort, json, jsonify, request
 from experiments.cron_jobs_test import main_fn
 from threading import Thread
@@ -24,7 +25,13 @@ def create_app(test_config=None):
 
     @app.route('/time')
     def print_time():
-        return jsonify({'time': datetime.now()})
+        return jsonify({'time': datetime.now()}), 200
+
+    
+    @app.route('/email')
+    def send_email():
+        email_sender()
+        return jsonify({'message': 'success'}), 200
 
     thread = Thread(target=main_fn)
     thread.daemon = True
@@ -33,4 +40,5 @@ def create_app(test_config=None):
     return app
 
 
-app = create_app()
+if __name__ == "__main__":
+    create_app().run(debug=False)
