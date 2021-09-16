@@ -15,9 +15,6 @@ def main_fn():
     trigger2 = CronTrigger(
         hour="6", minute="22", second="0", timezone="US/Pacific"
     )
-    trigger3 = CronTrigger(
-        hour="7", minute="41", second="00", timezone="US/Pacific"
-    )
     scheduler.add_job(
         email_sender,
         trigger=trigger1,
@@ -26,11 +23,6 @@ def main_fn():
     scheduler.add_job(
         email_sender,
         trigger=trigger2,
-        name="Evening run",
-    )
-    scheduler.add_job(
-        email_sender,
-        trigger=trigger3,
         name="Evening run",
     )
     while True:
