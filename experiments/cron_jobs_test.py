@@ -9,13 +9,29 @@ def main_fn():
     scheduler = BackgroundScheduler()
     scheduler.start()
 
-    trigger = CronTrigger(
-        hour="6", minute="20", second="0", timezone="US/Pacific"
+    trigger1 = CronTrigger(
+        hour="17", minute="56", second="0", timezone="US/Pacific"
+    )
+    trigger2 = CronTrigger(
+        hour="6", minute="22", second="0", timezone="US/Pacific"
+    )
+    trigger3 = CronTrigger(
+        hour="7", minute="41", second="00", timezone="US/Pacific"
     )
     scheduler.add_job(
         email_sender,
-        trigger=trigger,
-        name="daily foo",
+        trigger=trigger1,
+        name="Morning run",
+    )
+    scheduler.add_job(
+        email_sender,
+        trigger=trigger2,
+        name="Evening run",
+    )
+    scheduler.add_job(
+        email_sender,
+        trigger=trigger3,
+        name="Evening run",
     )
     while True:
         sleep(5)

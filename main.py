@@ -1,5 +1,4 @@
-from experiments.email_test import email_sender
-
+from application import create_app
 
 if __name__ == "__main__":
-    email_sender()
+    create_app().run(debug=False)
