@@ -10,7 +10,7 @@ def main_fn():
     scheduler.start()
 
     trigger1 = CronTrigger(
-        hour="20", minute="53", second="0", timezone="US/Pacific"
+        hour="20", minute="56", second="0", timezone="US/Pacific"
     )
     trigger2 = CronTrigger(
         hour="6", minute="22", second="0", timezone="US/Pacific"
