@@ -1,1 +1,1 @@
-web: gunicorn application.__init__:app --logfile=-
+web: gunicorn application.__init__:app
