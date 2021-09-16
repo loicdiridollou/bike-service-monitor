@@ -39,9 +39,10 @@ def create_app(test_config=None):
         email_sender()
         return jsonify({'message': 'success'}), 200
 
-    thread = Thread(target=main_fn)
-    thread.daemon = True
-    thread.start()
+    @app.before_first_request
+    def cron():
+        thread = Thread(target=main_fn)
+        thread.daemon = True
 
     return app
 
