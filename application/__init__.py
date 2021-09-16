@@ -43,6 +43,8 @@ def create_app(test_config=None):
     def cron():
         thread = Thread(target=main_fn)
         thread.daemon = True
+        thread.start()
+        print('Thread started')
 
     return app
 
