@@ -5,7 +5,6 @@ on:
   pull_request:
     branches: ["main"]
 jobs:
-  name:
   runs-on: ubuntu-latest
   steps:
     - uses: "actions/checkout@v2"
