@@ -1,0 +1,40 @@
+"""Core module of the data workflow"""
+import requests
+import pandas as pd
+
+
+FIELDS = ['station_id', 'is_renting', 'is_returning',
+          'num_bikes_available', 'num_ebikes_available', 'num_docks_available']
+
+
+def station_status(station_ids=None):
+    """Retrieve the status of all the stations"""
+    url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
+    source = requests.get(url).json()
+    status_df = pd.DataFrame(source['data']['stations'])
+    station_ids = station_ids if station_ids else status_df['station_id'].unique()
+    return status_df.loc[status_df['station_id'].isin(station_ids)]
+
+
+def station_information():
+    """Retrieve all the stations information"""
+    url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
+    source = requests.get(url).json()
+    information = pd.DataFrame(source['data']['stations'])
+    return information
+
+
+def get_results():
+    """Temporary function"""
+    url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
+    source = requests.get(url).json()
+
+    llist = source['data']['stations']
+
+    values = []
+    for elem in llist:
+        if (elem['station_id'] == "445"
+            or elem['station_id'] == "25"
+            or elem['station_id'] == "363"):
+            values.append({field: elem[field] for field in FIELDS})
+    return values
