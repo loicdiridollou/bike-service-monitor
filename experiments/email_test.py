@@ -12,7 +12,6 @@ if not os.environ.get("EMAIL_PASSWORD"):
 
 
 def email_sender():
-    print(datetime.now())
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "ld.app.testing@gmail.com"  # Enter your address
