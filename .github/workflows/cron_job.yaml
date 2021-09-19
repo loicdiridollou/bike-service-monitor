@@ -1,7 +1,7 @@
 name: Email sender
 on:
   schedule:
-    - cron: '10 16 * * *'
+    - cron: '41 20 * * *'
 
 jobs:
   my_first_job:
@@ -19,5 +19,7 @@ jobs:
           pip install pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: "Emailing"
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           python clock.py
