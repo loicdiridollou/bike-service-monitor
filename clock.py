@@ -1,7 +1,4 @@
-#from experiments.email_test import email_sender
-import os
-
+from experiments.email_test import email_sender
 
 if __name__ == "__main__":
-    #email_sender()
-    print(os.environ.get('EMAIL_PASSWORD'))
+    email_sender()
