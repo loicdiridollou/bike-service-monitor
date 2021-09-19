@@ -7,6 +7,11 @@ from datetime import datetime
 import os
 
 
+thread = Thread(target=main_fn)
+thread.daemon = True
+thread.start()
+    
+
 def create_app(test_config=None):
     """Creating the app and db
     """
@@ -39,10 +44,6 @@ def create_app(test_config=None):
         email_sender()
         return jsonify({'message': 'success'}), 200
 
-    thread = Thread(target=main_fn)
-    thread.daemon = True
-    thread.start()
-    
     return app
 
 app = create_app()
