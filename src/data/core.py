@@ -21,7 +21,6 @@ def station_information(station_ids=None):
     url = 'https://gbfs.baywheels.com/gbfs/en/station_information.json'
     source = requests.get(url).json()
     information_df = pd.DataFrame(source['data']['stations'])
-    
     station_ids = station_ids if station_ids else information_df['station_id'].unique()
     return information_df.loc[information_df['station_id'].isin(station_ids)]
 
