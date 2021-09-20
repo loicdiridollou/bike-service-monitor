@@ -29,5 +29,6 @@ jobs:
     name: Deploying to Heroku
     runs-on: ubuntu-latest
     steps:
-      if: success()
-      run: echo "success"
+      - name: "test"
+        if: success()
+        run: echo "success"
