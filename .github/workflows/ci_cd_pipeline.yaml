@@ -23,6 +23,8 @@ jobs:
         run: |
           pylint src
       - name: "Testing"
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           pytest src
       - name: Deploying to Heroku
