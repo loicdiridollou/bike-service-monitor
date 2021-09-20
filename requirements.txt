@@ -1,4 +1,5 @@
 APScheduler==3.7.0
+astroid==2.8.0
 attrs==21.2.0
 certifi==2021.5.30
 charset-normalizer==2.0.5
@@ -7,14 +8,19 @@ Flask==2.0.1
 gunicorn==20.1.0
 idna==3.2
 iniconfig==1.1.1
+isort==5.9.3
 itsdangerous==2.0.1
 Jinja2==3.0.1
+lazy-object-proxy==1.6.0
 MarkupSafe==2.0.1
+mccabe==0.6.1
 numpy==1.21.2
 packaging==21.0
 pandas==1.3.3
+platformdirs==2.3.0
 pluggy==1.0.0
 py==1.10.0
+pylint==2.11.1
 pyparsing==2.4.7
 pytest==6.2.5
 python-dateutil==2.8.2
@@ -24,6 +30,8 @@ requests==2.26.0
 six==1.16.0
 -e src
 toml==0.10.2
+typing-extensions==3.10.0.2
 tzlocal==2.1
 urllib3==1.26.6
 Werkzeug==2.0.1
+wrapt==1.12.1
