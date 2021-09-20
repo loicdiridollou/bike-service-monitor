@@ -1,12 +1,12 @@
 name: CI/CD Pipeline for Bike Service Monitor
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
 jobs:
-  my_first_job:
-    name: CI/CD
+  ci_job:
+    name: Linting and testing
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
@@ -25,3 +25,9 @@ jobs:
       - name: "Testing"
         run: |
           pytest src
+  deployment_job:
+    name: Deploying to Heroku
+    runs-on: ubuntu-latest
+    steps:
+      if: success()
+      run: echo "success"

@@ -16,12 +16,14 @@ def station_status(station_ids=None):
     return status_df.loc[status_df['station_id'].isin(station_ids)]
 
 
-def station_information():
+def station_information(station_ids=None):
     """Retrieve all the stations information"""
-    url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
+    url = 'https://gbfs.baywheels.com/gbfs/en/station_information.json'
     source = requests.get(url).json()
-    information = pd.DataFrame(source['data']['stations'])
-    return information
+    information_df = pd.DataFrame(source['data']['stations'])
+    
+    station_ids = station_ids if station_ids else information_df['station_id'].unique()
+    return information_df.loc[information_df['station_id'].isin(station_ids)]
 
 
 def get_results():
