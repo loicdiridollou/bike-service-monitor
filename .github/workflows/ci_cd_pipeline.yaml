@@ -34,3 +34,8 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ld-heroku
           heroku_email: loic.diridollou@gmail.com
+      - name: Creating issue on Jira if build fails
+        
+        if: failure()
+        run: |
+          echo "failure"
