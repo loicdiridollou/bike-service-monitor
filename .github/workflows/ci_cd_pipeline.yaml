@@ -46,7 +46,7 @@ jobs:
         uses: atlassian/gajira-create@master
         if: failure()
         with:
-          project: DAI
+          project: BSM
           issuetype: Task
           summary: |
             CI/CD failed for ${{ github.repository }}
