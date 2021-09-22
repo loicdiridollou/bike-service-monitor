@@ -34,8 +34,21 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ld-heroku
           heroku_email: loic.diridollou@gmail.com
-      - name: Creating issue on Jira if build fails
-        
+      - name: Login to Jira
+        uses: atlassian/gajira-login@master
         if: failure()
-        run: |
-          echo "failure"
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      - name: Create issue if build fails
+        id: create_fail 
+        uses: atlassian/gajira-create@master
+        if: failure()
+        with:
+          project: DAI
+          issuetype: Task
+          summary: |
+            CI/CD failed for ${{ github.repository }}
+          description: |
+            Comparegtrwhvtr
