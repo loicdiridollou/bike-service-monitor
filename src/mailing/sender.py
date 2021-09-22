@@ -6,7 +6,7 @@ import yaml
 
 
 if not os.environ.get("EMAIL_PASSWORD"):
-    with open('config.yaml', 'rb') as config_file:
+    with open('config_local.yaml', 'rb') as config_file:
         config = yaml.full_load(config_file)['data']
         os.environ.update(config)
 
