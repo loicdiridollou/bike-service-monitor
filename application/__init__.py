@@ -1,7 +1,7 @@
 # application/__init__.py
 from experiments.email_test import email_sender
 from flask import Flask, abort, json, jsonify, request
-from experiments.cron_jobs_test import main_fn
+from scheduling.cron_jobs import main_fn
 from threading import Thread
 from datetime import datetime
 import os
