@@ -5,7 +5,7 @@ from apscheduler.triggers.cron import CronTrigger
 
 from experiments.email_test import email_sender
 
-def main_fn():
+"""def main_fn():
     scheduler = BackgroundScheduler()
     scheduler.start()
 
@@ -35,3 +35,4 @@ def main_fn():
     )
     while True:
         sleep(5)
+"""
