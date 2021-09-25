@@ -32,7 +32,7 @@ jobs:
         if: success()
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ld-heroku
+          heroku_app_name: bike-service-monitor
           heroku_email: loic.diridollou@gmail.com
       - name: Login to Jira
         uses: atlassian/gajira-login@master
