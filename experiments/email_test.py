@@ -5,10 +5,9 @@ from experiments.data_acq_test import get_results
 from datetime import datetime
 
 if not os.environ.get("EMAIL_PASSWORD"):
-    with open('config.yaml') as config_file:
+    with open('config/local_config.yaml') as config_file:
         config = yaml.full_load(config_file)['data']
         os.environ.update(config)
-
 
 
 def email_sender():
