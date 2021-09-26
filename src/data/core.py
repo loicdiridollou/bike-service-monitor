@@ -25,17 +25,15 @@ def station_information(station_ids=None):
     return information_df.loc[information_df['station_id'].isin(station_ids)]
 
 
-def get_results():
+def get_results(stations):
     """Temporary function"""
     url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
     source = requests.get(url).json()
 
     llist = source['data']['stations']
-
+    stations = stations if stations else ['25', '363', '445']
     values = []
     for elem in llist:
-        if (elem['station_id'] == "445"
-            or elem['station_id'] == "25"
-            or elem['station_id'] == "363"):
+        if elem['station_id'] in stations:
             values.append({field: elem[field] for field in FIELDS})
     return values
