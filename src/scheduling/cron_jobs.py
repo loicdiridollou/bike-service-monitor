@@ -20,12 +20,16 @@ def main_fn(config_fn=DEFAULT_CONFIG):
     for el in cron_times:
         time = pd.Timestamp(cron_times[el]['time'])
         trigger = CronTrigger(
-            hour=time.hour, minute=time.minute, second=time.second, timezone="US/Pacific"
+            hour=time.hour,
+            minute=time.minute,
+            second=time.second,
+            day_of_week=cron_times[el]['day_of_week'],
+            timezone="US/Pacific"
         )
         scheduler.add_job(
             email_sender,
             trigger=trigger,
-            kwargs={'stations': cron_times[el]['stations']},
+            kwargs={'stations': cron_times[el]['stations'].split(',')},
             name=cron_times[el]['name'],
         )
 
