@@ -4,7 +4,7 @@ import yaml
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 import pandas as pd
-from experiments.email_test import email_sender
+from mailing.sender import email_sender
 
 
 DEFAULT_CONFIG = "config/config.yaml"

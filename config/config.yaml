@@ -5,5 +5,5 @@ cron_times:
     stations: '25, 363, 445'
   time2:
     name: 'Evening'
-    time: '12:12:00'
-    sations: '30, 465'
+    time: '12:31:00'
+    stations: '30, 465'
