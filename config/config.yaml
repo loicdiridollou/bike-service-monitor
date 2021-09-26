@@ -1,3 +1,9 @@
 cron_times:
-  time1: '06:22:00'
-  time2: '17:55:00'
+  time1: 
+    name: 'Morning'
+    time: '06:22:00'
+    stations: '25, 363, 445'
+  time2:
+    name: 'Evening'
+    time: '12:11:00'
+    sations: '30, 465'
