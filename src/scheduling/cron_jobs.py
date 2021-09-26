@@ -17,15 +17,16 @@ def main_fn(config_fn=DEFAULT_CONFIG):
     scheduler = BackgroundScheduler()
     scheduler.start()
 
-    for name in cron_times:
-        time = pd.Timestamp(cron_times[name])
+    for el in cron_times:
+        time = pd.Timestamp(cron_times[el]['time'])
         trigger = CronTrigger(
             hour=time.hour, minute=time.minute, second=time.second, timezone="US/Pacific"
         )
         scheduler.add_job(
             email_sender,
             trigger=trigger,
-            name=name,
+            kwargs={'stations': cron_times[el]['stations']},
+            name=cron_times[el]['name'],
         )
 
     while True:
