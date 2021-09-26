@@ -1,9 +1,11 @@
 cron_times:
   time1: 
     name: 'Morning'
+    day_of_week: '0-4'
     time: '06:22:00'
-    stations: '25, 363, 445'
+    stations: '25,363,445'
   time2:
     name: 'Evening'
-    time: '12:31:00'
-    stations: '30, 465'
+    day_of_week: '0-4'
+    time: '17:55:00'
+    stations: '30,465'
