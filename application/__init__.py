@@ -73,15 +73,15 @@ def create_app(test_config=None):
     def delete_times(time_name, config_fn=DEFAULT_CONFIG):
         with open(config_fn, "rb") as config_file:
             config_data = yaml.full_load(config_file)
-        print(config_data)
-        names = sorted(config_data["cron_times"].keys())
-        new_num = int(names[-1][4:])+1
+        names = config_data["cron_times"]
+        if time_name not in names:
+            abort(400)
         del config_data["cron_times"][time_name]
 
         with open(config_fn, "w") as config_file:
             yaml.dump(config_data, config_file)
         
-        return jsonify({"message": "succes"}), 200
+        return jsonify({"message": "succes", "deleted_time": time_name}), 200
 
     @app.errorhandler(400)
     def bad_request():
