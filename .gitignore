@@ -1,5 +1,5 @@
 venv/
-config.yaml
+**/local_config.yaml
 **/.pytest_cache
 **/*.egg-info
 **/__pycache__
