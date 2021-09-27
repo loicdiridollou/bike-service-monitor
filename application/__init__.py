@@ -1,10 +1,15 @@
 # application/__init__.py
+from re import L
+from apscheduler.triggers import cron
 from mailing.sender import email_sender
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from scheduling.cron_jobs import main_fn
 from threading import Thread
 from datetime import datetime
 import os
+import yaml
+
+DEFAULT_CONFIG = "config/config.yaml"
 
 
 thread = Thread(target=main_fn)
@@ -23,16 +28,13 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-
     @app.route('/')
     def home():
         return jsonify({'message': 'healthy'}), 200
 
-
     @app.route('/time')
     def print_time():
         return jsonify({'time': datetime.now()}), 200
-
 
     @app.route('/var')
     def print_var():
@@ -43,6 +45,50 @@ def create_app(test_config=None):
     def send_email():
         email_sender()
         return jsonify({'message': 'success'}), 200
+    
+    @app.route('/times')
+    def list_times():
+        with open("config/config.yaml", "rb") as config_file:
+            cron_times = yaml.full_load(config_file)["cron_times"]
+        return jsonify({"message": "success", 
+                        "times": cron_times}), 200
+
+    @app.route('/times', methods=['POST'])
+    def add_time(config_fn=DEFAULT_CONFIG):
+        body = request.get_json()
+        if body is None:
+            abort(400)
+        with open(config_fn, "rb") as config_file:
+            config_data = yaml.full_load(config_file)
+        names = sorted(config_data["cron_times"].keys())
+        new_num = int(names[-1][4:])+1
+        config_data["cron_times"]["time" + str(new_num)] = body
+
+        with open(config_fn, "w") as config_file:
+            yaml.dump(config_data, config_file)
+        
+        return jsonify({"message": "succes"}), 200
+
+    @app.route("/times/<time_name>", methods=["DELETE"])
+    def delete_times(time_name, config_fn=DEFAULT_CONFIG):
+        with open(config_fn, "rb") as config_file:
+            config_data = yaml.full_load(config_file)
+        print(config_data)
+        names = sorted(config_data["cron_times"].keys())
+        new_num = int(names[-1][4:])+1
+        del config_data["cron_times"][time_name]
+
+        with open(config_fn, "w") as config_file:
+            yaml.dump(config_data, config_file)
+        
+        return jsonify({"message": "succes"}), 200
+
+    @app.errorhandler(400)
+    def bad_request():
+        return jsonify({'success': False,
+                        'error': 400,
+                        'message': 'bad request'
+                        }), 400
 
     return app
 
