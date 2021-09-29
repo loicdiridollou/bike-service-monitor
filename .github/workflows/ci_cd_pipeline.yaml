@@ -38,4 +38,4 @@ jobs:
         id: step1
       - name: print codecov
         run: |
-          echo ${{ steps.step1.changelog }}s
+          echo ${{ steps.step1.changelog }}
