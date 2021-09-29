@@ -34,18 +34,15 @@ jobs:
           coverage run -m --source application,src pytest src application;
           coverage json --omit="**/tests/*"
           VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
-          echo "::set-output name=total::$VARIABLE"
-        id: step1
-      - name: associate color
-        run: |
-          if (( $(echo "$total <= 50" | bc -l) )) ; then
+          echo "::set-output name=total::$VARIABLE";
+          if (( $(echo "$VARIABLE <= 50" | bc -l) )) ; then
             echo "::set-output name=color::red"
-          elif (( $(echo "$total > 80" | bc -l) )); then
+          elif (( $(echo "$VARIABLE > 80" | bc -l) )); then
             echo "::set-output name=color::green"
           else
             echo "::set-output name=color::orange"
           fi
-        id: step2
+        id: step1
       - name: Create code coverage badge
         uses: schneegans/dynamic-badges-action@v1.1.0
         with:
@@ -54,4 +51,4 @@ jobs:
           filename: coverage.json
           label: Code coverage
           message: ${{ steps.step1.outputs.total }}
-          color: ${{ steps.step2.outputs.color }}
+          color: ${{ steps.step1.outputs.color }}
