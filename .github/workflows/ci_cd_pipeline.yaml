@@ -33,7 +33,7 @@ jobs:
         run: |
           coverage run -m pytest src application;
           coverage json;
-          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
+          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))") >> $GITHUB_ENV
       - name: print codecov
         run: |
           echo ${{ env.VARIABLE }}
