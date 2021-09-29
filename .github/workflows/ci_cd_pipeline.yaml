@@ -69,11 +69,11 @@ jobs:
       - name: Create issue if build fails
         id: create_fail 
         uses: atlassian/gajira-create@master
-        if: failure()
+        if: success()
         with:
           project: BSM
           issuetype: Task
           summary: |
-            CI/CD failed for ${{ github.repository }}
+            CI/CD failed for ${{ github.repository }} at ${{ github.sha::7 }}
           description: |
             Comparegtrwhvtr
