@@ -74,6 +74,6 @@ jobs:
           project: BSM
           issuetype: Task
           summary: |
-            CI/CD failed for ${{ github.repository }} at ${{ GITHUB_SHA }}
+            CI/CD failed for ${{ github.repository }} at ${{ github.sha }}
           description: |
             Comparegtrwhvtr
