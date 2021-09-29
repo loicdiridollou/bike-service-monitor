@@ -52,3 +52,28 @@ jobs:
           label: Code coverage
           message: ${{ steps.step1.outputs.total }}
           color: ${{ steps.step1.outputs.color }}
+      - name: Deploying to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        if: never()
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: bike-service-monitor
+          heroku_email: loic.diridollou@gmail.com
+      - name: Login to Jira
+        uses: atlassian/gajira-login@master
+        if: failure()
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      - name: Create issue if build fails
+        id: create_fail 
+        uses: atlassian/gajira-create@master
+        if: failure()
+        with:
+          project: BSM
+          issuetype: Task
+          summary: |
+            CI/CD failed for ${{ github.repository }}
+          description: |
+            Comparegtrwhvtr
