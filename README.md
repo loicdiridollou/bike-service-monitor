@@ -4,3 +4,6 @@
 
 
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/loicdiridollou/a7f2cd48b0eeadf8f06b903c28ddf517/raw/linting.json)
+
+
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/loicdiridollou/1bfc8baf02ee8afb083b1feb4063082c/raw/coverage.json)
