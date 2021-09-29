@@ -7,6 +7,7 @@ on:
 jobs:
   badge:
     name: Create badge
+    runs-on: ubuntu-latest
     steps:
       - name: Create Awesome Badge
         uses: schneegans/dynamic-badges-action@v1.1.0
