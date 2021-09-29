@@ -33,7 +33,9 @@ jobs:
         run: |
           coverage run -m pytest src application;
           coverage json;
-          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))") >> $GITHUB_ENV
+          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
+          echo "::set-output name=changelog::$VARIABLE"
+        id: step1
       - name: print codecov
         run: |
-          echo ${{ env.VARIABLE }}s
+          echo ${{ steps.step1.changelog }}s
