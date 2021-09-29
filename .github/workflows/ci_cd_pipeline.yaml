@@ -36,6 +36,9 @@ jobs:
           VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
           echo "::set-output name=changelog::$VARIABLE"
         id: step1
+      - name: print coverage
+        run: |
+          coverage report -m
       - name: print codecov
         run: |
           echo ${{ steps.step1.outputs.changelog }}
