@@ -1,0 +1,19 @@
+name: CI/CD Pipeline for Bike Service Monitor
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+jobs:
+  badge:
+    name: Create badge
+    steps:
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: a7f2cd48b0eeadf8f06b903c28ddf517
+          filename: linting.json
+          label: Hello
+          message: World
+          color: orange
