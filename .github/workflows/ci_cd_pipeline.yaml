@@ -1,9 +1,9 @@
 name: CI/CD Pipeline for Bike Service Monitor
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
 jobs:
   build_and_deploy:
     name: Linting, testing and deploying
@@ -27,6 +27,13 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           pytest src
+      - name: Code coverage
+        run: |
+          coverage run -m pytest src application
+          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
+      - name: print codecov
+        run: |
+          echo ${{ env.VARIABLE }}
       - name: Deploying to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         if: success()
