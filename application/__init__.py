@@ -83,11 +83,18 @@ def create_app(test_config=None):
         return jsonify({"message": "succes", "deleted_time": time_name}), 200
 
     @app.errorhandler(400)
-    def bad_request():
+    def bad_request(error): # pylint: disable=W0613
         return jsonify({'success': False,
                         'error': 400,
-                        'message': 'bad request'
+                        'message': "bad request"
                         }), 400
+
+    @app.errorhandler(404)
+    def not_found(error): # pylint: disable=W0613
+        return jsonify({'success': False,
+                        'error': 404,
+                        'message': "not found"
+                        }), 404
 
     return app
 
