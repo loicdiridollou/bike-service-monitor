@@ -28,8 +28,11 @@ jobs:
         run: |
           pytest src
       - name: Code coverage
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
-          coverage run -m pytest src application
+          coverage run -m pytest src application;
+          coverage json;
           VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
       - name: print codecov
         run: |
