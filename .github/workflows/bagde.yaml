@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create the Badge
-        uses: loic.diridollou/gh-action
+        uses: loicdiridollou/gh-action
         with:
           TEST: answer.json
           
