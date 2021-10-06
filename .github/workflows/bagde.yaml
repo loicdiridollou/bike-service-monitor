@@ -1,20 +1,14 @@
-name: CI/CD Pipeline for Bike Service Monitor
-on:
-  push:
-    branches: ["hgrue"]
-  pull_request:
-    branches: ["cejrk"]
+name: Build Badges
+
+on: [push]
+
 jobs:
-  badge:
-    name: Create badge
+  answer-badge:
+    name: Create Answer Badge
     runs-on: ubuntu-latest
     steps:
-      - name: Create Awesome Badge
-        uses: schneegans/dynamic-badges-action@v1.1.0
+      - name: Create the Badge
+        uses: loic.diridollou/gh-action
         with:
-          auth: ${{ secrets.GIST_SECRET }}
-          gistID: a7f2cd48b0eeadf8f06b903c28ddf517
-          filename: linting.json
-          label: Hello
-          message: World
-          color: orange
+          TEST: answer.json
+          
