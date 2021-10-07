@@ -10,5 +10,10 @@ jobs:
       - name: Create the Badge
         uses: loicdiridollou/gh-action@main
         with:
-          TEST: answer.json
+          secret: ${{ secrets.GIST_SECRET }}
+          gistID: 9a9cd8f729d7d20be9d383d11ccbf3df
+          filename: test.json
+          message: Code coverage
+          color: green
+          value: 36
           
