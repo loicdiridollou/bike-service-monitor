@@ -14,6 +14,7 @@ jobs:
           gist_id: 9a9cd8f729d7d20be9d383d11ccbf3df
           filename: test.json
           message: Code coverage
-          color: green
-          value: 36
+          color: orange
+          value: 37.5
+          user: loicdiridollou
           
