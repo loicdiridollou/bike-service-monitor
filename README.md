@@ -7,3 +7,5 @@
 
 
 Still testing
+
+Planning on more flags
