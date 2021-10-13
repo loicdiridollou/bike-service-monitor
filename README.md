@@ -4,8 +4,3 @@
 
 
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/loicdiridollou/9a9cd8f729d7d20be9d383d11ccbf3df/raw/coverage.json)
-
-
-Still testing
-
-Planning on more flags
