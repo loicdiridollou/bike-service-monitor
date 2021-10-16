@@ -1,9 +1,9 @@
 name: CI/CD Pipeline for Bike Service Monitor
 on:
   push:
-    branches: ["mfeain"]
+    branches: ["main"]
   pull_request:
-    branches: ["mafein"]
+    branches: ["main"]
 jobs:
   build_and_deploy:
     name: Linting, testing and deploying
@@ -43,15 +43,16 @@ jobs:
             echo "::set-output name=color::orange"
           fi
         id: step1
-      - name: Create code coverage badge
-        uses: schneegans/dynamic-badges-action@v1.1.0
+      - name: Create the Badge
+        uses: loicdiridollou/dyn-badge-action@main
         with:
-          auth: ${{ secrets.GIST_SECRET }}
-          gistID: 1bfc8baf02ee8afb083b1feb4063082c
-          filename: coverage.json
-          label: Code coverage
-          message: ${{ steps.step1.outputs.total }}
+          secret: ${{ secrets.GIST_SECRET }}
+          gist_id: da19f1209ce08e8942d89a5a2277b8df
+          filename: coverage_bike_service_monitor.json
+          message: Code coverage
           color: ${{ steps.step1.outputs.color }}
+          value: ${{ steps.step1.outputs.total }}
+          user: loicdiridollou
       - name: Deploying to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         if: success()
