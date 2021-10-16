@@ -1,6 +1,8 @@
 name: Build Badges
 
-on: [push]
+on: 
+  push:
+    branches: ["other"]
 
 jobs:
   answer-badge:
@@ -20,6 +22,8 @@ jobs:
       - name: "Run test coverage"
         run: |
           python -m pytest --cov=src src
+        env:
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
       - name: "Create json report"
         run: |
           python -m coverage json --omit='*/tests/*'
