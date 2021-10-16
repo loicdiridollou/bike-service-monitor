@@ -47,7 +47,7 @@ jobs:
         uses: loicdiridollou/dyn-badge-action@main
         with:
           secret: ${{ secrets.GIST_SECRET }}
-          gist_id: d5ae45a9e5149f26b09e1ab75db8325c
+          gist_id: 5da5399bcd13f130899b1f9334c9ae96
           filename: coverage_bike_service_monitor.json
           message: Code coverage
           color: ${{ steps.step1.outputs.color }}
