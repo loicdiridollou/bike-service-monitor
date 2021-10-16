@@ -42,6 +42,7 @@ jobs:
           else
             echo "::set-output name=color::orange"
           fi
+          rm .coverage coverage.json
         id: step1
       - name: Create the Badge
         uses: loicdiridollou/dyn-badge-action@main
