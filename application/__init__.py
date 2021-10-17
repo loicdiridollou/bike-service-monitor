@@ -42,7 +42,7 @@ def create_app(test_config=None):
 
     @app.route('/times')
     def list_times():
-        with open("config/config.yaml", "r") as config_file:
+        with open("config/config.yaml", "r", encoding="utf-8") as config_file:
             cron_times = yaml.full_load(config_file)["cron_times"]
         return jsonify({"message": "success",
                         "times": cron_times}), 200
