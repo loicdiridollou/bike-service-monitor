@@ -35,11 +35,6 @@ def create_app(test_config=None):
     def print_time():
         return jsonify({'time': datetime.now()}), 200
 
-    @app.route('/var')
-    def print_var():
-        return jsonify({"debug": app.debug,
-                        'os_env': os.environ.get('WERKZEUG_RUN_MAIN')})
-
     @app.route('/email')
     def send_email():
         email_sender()
@@ -47,7 +42,7 @@ def create_app(test_config=None):
 
     @app.route('/times')
     def list_times():
-        with open("config/config.yaml", "rb") as config_file:
+        with open("config/config.yaml", "r") as config_file:
             cron_times = yaml.full_load(config_file)["cron_times"]
         return jsonify({"message": "success",
                         "times": cron_times}), 200
@@ -57,7 +52,7 @@ def create_app(test_config=None):
         body = request.get_json()
         if body is None:
             abort(400)
-        with open(config_fn, "rb", encoding="utf-8") as config_file:
+        with open(config_fn, "r", encoding="utf-8") as config_file:
             config_data = yaml.full_load(config_file)
         names = sorted(config_data["cron_times"].keys())
         new_num = int(names[-1][4:])+1
@@ -70,7 +65,7 @@ def create_app(test_config=None):
 
     @app.route("/times/<time_name>", methods=["DELETE"])
     def delete_times(time_name, config_fn=DEFAULT_CONFIG):
-        with open(config_fn, "rb", encoding="utf-8") as config_file:
+        with open(config_fn, "r", encoding="utf-8") as config_file:
             config_data = yaml.full_load(config_file)
         names = config_data["cron_times"]
         if time_name not in names:
