@@ -33,7 +33,7 @@ jobs:
         run: |
           coverage run -m --source application,src pytest src application;
           coverage json --omit="**/tests/*"
-          VARIABLE=$(python -c "import json; print(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))")
+          VARIABLE=$(python -c "import json; print(str(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))+'%')")
           echo "::set-output name=total::$VARIABLE";
           if (( $(echo "$VARIABLE <= 50" | bc -l) )) ; then
             echo "::set-output name=color::red"
