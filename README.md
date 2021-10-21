@@ -5,3 +5,6 @@
 
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/loicdiridollou/5da5399bcd13f130899b1f9334c9ae96/raw/coverage_bike_service_monitor.json)
 
+
+
+Next steps are going to be about extension of this project to AWS to get data acquisition from station status.
