@@ -9,4 +9,4 @@
 
 Next steps are going to be about extension of this project to AWS to get data acquisition from station status.
 
-Upgrade python version of lambda function to 3.9 for the bms-send-email
+Upgrade python version of lambda function to 3.9 for the bms-send-email --> done with the right packages (local versions)
