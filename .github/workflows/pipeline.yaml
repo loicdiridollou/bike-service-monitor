@@ -54,13 +54,6 @@ jobs:
           color: ${{ steps.step1.outputs.color }}
           value: ${{ steps.step1.outputs.total }}
           user: loicdiridollou
-      - name: Deploying to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        if: success()
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: bike-service-monitor
-          heroku_email: loic.diridollou@gmail.com
       - name: Login to Jira
         uses: atlassian/gajira-login@master
         if: failure()
