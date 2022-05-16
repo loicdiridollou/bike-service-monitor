@@ -10,3 +10,5 @@
 Next steps are going to be about extension of this project to AWS to get data acquisition from station status.
 
 Upgrade python version of lambda function to 3.9 for the bms-send-email --> done with the right packages (local versions)
+Look at Terraform or CloudFormation to have it created on a regular basis
+Think about upgrading layer rather than recreating a new one everytime
