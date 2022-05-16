@@ -1,9 +1,9 @@
-"""Core module of the data workflow"""
+"""Core module of the data workflow."""
 import requests
 import pandas as pd
 
 
-FIELDS = ['station_id', 'is_renting', 'is_returning',
+FIELDS = ['name', 'is_renting', 'is_returning',
           'num_bikes_available', 'num_ebikes_available', 'num_docks_available']
 
 
