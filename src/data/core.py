@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 
-FIELDS = ['name', 'is_renting', 'is_returning',
+FIELDS = ['is_renting', 'is_returning',
           'num_bikes_available', 'num_ebikes_available', 'num_docks_available']
 
 
@@ -29,11 +29,14 @@ def get_results(stations):
     """Temporary function"""
     url = 'https://gbfs.baywheels.com/gbfs/en/station_status.json'
     source = requests.get(url).json()
+    stations = stations if stations else ['25', '363', '445']
+    stations_info = station_information(stations)
 
     llist = source['data']['stations']
-    stations = stations if stations else ['25', '363', '445']
     values = []
+    import pdb; pdb.set_trace()
     for elem in llist:
-        if elem['station_id'] in stations:
-            values.append({field: elem[field] for field in FIELDS})
+        if (st_id := elem['station_id']) in stations:
+            res = {'name': stations_info.loc[stations_info['station_id'] == st_id, 'name'].squeeze()}
+            values.append(res | {field: elem[field] for field in FIELDS})
     return values
