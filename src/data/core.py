@@ -34,9 +34,8 @@ def get_results(stations):
 
     llist = source['data']['stations']
     values = []
-    import pdb; pdb.set_trace()
     for elem in llist:
         if (st_id := elem['station_id']) in stations:
-            res = {'name': stations_info.loc[stations_info['station_id'] == st_id, 'name'].squeeze()}
-            values.append(res | {field: elem[field] for field in FIELDS})
+            st_name = stations_info.loc[stations_info['station_id'] == st_id, 'name'].squeeze()
+            values.append({'name': st_name} | {field: elem[field] for field in FIELDS})
     return values
