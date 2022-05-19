@@ -9,6 +9,7 @@ def test_email_sender():
     ms.email_sender(message="Random message", test_mode=True)
 
 
+@pytest.mark.skip(reason="Not passing credentials yet to Github")
 def test_ses_sender():
     """Test function for the SES email sender."""
     mses.send_email(recipients=["ld.app.testing@gmail.com"])
