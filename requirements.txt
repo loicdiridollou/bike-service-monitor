@@ -17,7 +17,7 @@ requests==2.31.0
 s3transfer==0.9.0
 six==1.16.0
 SQLAlchemy==2.0.23
-src @ file:///Users/loic.diridollou/Documents/Code/bike-service-monitor/src
+src @ ../bike-service-monitor/src
 typing_extensions==4.9.0
 tzdata==2023.3
 urllib3==2.0.7
