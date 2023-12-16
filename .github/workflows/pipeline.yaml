@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.12
       - name: "Install dependencies"
         run: |
           python -m pip install --upgrade pip
@@ -62,7 +62,7 @@ jobs:
           JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
       - name: Create issue if build fails
-        id: create_fail 
+        id: create_fail
         uses: atlassian/gajira-create@master
         if: failure()
         with:
