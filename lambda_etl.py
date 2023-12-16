@@ -34,8 +34,8 @@ def get_filenames():
     tab = []
     s3_client = boto3.client(
         "s3",
-        aws_access_key_id="AKIAYKEUVJVD5TPT2EVB",
-        aws_secret_access_key="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",
+        aws_access_key_id="****",
+        aws_secret_access_key="****",
         region_name="us-west-1",
     )
 
@@ -51,7 +51,7 @@ def get_timestamps():
     """Get timestamps."""
     engine = sq.create_engine(
         "{}://{}:{}@gbfs-data.cocxlae2ptlp.us-west-1.rds.amazonaws.com/{}".format(
-            "postgresql", "stations_data", "gbfs_db_admin", "adminadmin"
+            "postgresql", "stations_data", "gbfs_db_admin", "PASSWORD"
         )
     )
     with engine.connect() as conn:
