@@ -19,7 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          python src/setup.py install
+          pip install -e src
       - name: "Linting"
         run: |
           pylint src; pylint application
@@ -35,13 +35,13 @@ jobs:
           coverage run -m --source application,src pytest src application;
           coverage json --omit="**/tests/*"
           VARIABLE=$(python -c "import json; print(str(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))+'%')")
-          echo "::set-output name=total::$VARIABLE";
+          echo "name=total::$VARIABLE" >> $GITHUB_OUTPUT
           if (( $(echo "$VARIABLE <= 50" | bc -l) )) ; then
-            echo "::set-output name=color::red"
+            echo "name=color::red" >> $GITHUB_OUTPUT
           elif (( $(echo "$VARIABLE > 80" | bc -l) )); then
-            echo "::set-output name=color::green"
+            echo "name=color::green" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=color::orange"
+            echo "name=color::orange" >> $GITHUB_OUTPUT
           fi
           rm .coverage coverage.json
         id: step1
