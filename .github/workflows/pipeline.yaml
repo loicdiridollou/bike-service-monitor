@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.12
       - name: "Install dependencies"
         run: |
           python -m pip install --upgrade pip
           pip install pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -e src
       - name: "Linting"
         run: |
           pylint src; pylint application
@@ -34,13 +35,13 @@ jobs:
           coverage run -m --source application,src pytest src application;
           coverage json --omit="**/tests/*"
           VARIABLE=$(python -c "import json; print(str(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))+'%')")
-          echo "::set-output name=total::$VARIABLE";
+          echo "name=total::$VARIABLE" >> $GITHUB_OUTPUT
           if (( $(echo "$VARIABLE <= 50" | bc -l) )) ; then
-            echo "::set-output name=color::red"
+            echo "name=color::red" >> $GITHUB_OUTPUT
           elif (( $(echo "$VARIABLE > 80" | bc -l) )); then
-            echo "::set-output name=color::green"
+            echo "name=color::green" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=color::orange"
+            echo "name=color::orange" >> $GITHUB_OUTPUT
           fi
           rm .coverage coverage.json
         id: step1
@@ -62,7 +63,7 @@ jobs:
           JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
       - name: Create issue if build fails
-        id: create_fail 
+        id: create_fail
         uses: atlassian/gajira-create@master
         if: failure()
         with:

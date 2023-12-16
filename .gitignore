@@ -4,3 +4,6 @@ venv/
 **/*.egg-info
 **/__pycache__
 .ipynb_checkpoints
+new_user_credentials_cc.csv
+.DS_Store
+*.zip

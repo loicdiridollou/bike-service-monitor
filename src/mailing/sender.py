@@ -3,14 +3,13 @@ import os
 import ssl
 import smtplib
 import yaml
-import data.core as dc
+import src.data.core as dc
 
 
 if not os.environ.get("EMAIL_PASSWORD"):
-    with open('config/local_config.yaml', 'rb') as config_file:
-        config = yaml.full_load(config_file)['data']
+    with open("config/local_config.yaml", "rb") as config_file:
+        config = yaml.full_load(config_file)["data"]
         os.environ.update(config)
-
 
 
 def email_sender(message=None, stations=None, test_mode=False):
@@ -26,11 +25,13 @@ def email_sender(message=None, stations=None, test_mode=False):
 
                   """
         message += "\n"
-        message += "This is the state of the near-by station of 199 New Montgomery St.\n"
+        message += (
+            "This is the state of the near-by station of 199 New Montgomery St.\n"
+        )
 
         values = dc.get_results(stations)
         for elem in values:
-            llist = [field + ': ' + str(elem[field]) for field in elem]
+            llist = [field + ": " + str(elem[field]) for field in elem]
             message += " | ".join(llist)
             message += "\n"
 
@@ -42,4 +43,4 @@ def email_sender(message=None, stations=None, test_mode=False):
 
 
 if __name__ == "__main__":
-    email_sender(stations=['25', '363', '445'])
+    email_sender(stations=["25", "363", "445"])
