@@ -21,8 +21,8 @@ def delete_file(fname):
     """Delete file in given path."""
     s3_client = boto3.client(
         "s3",
-        aws_access_key_id="AKIAYKEUVJVD5TPT2EVB",
-        aws_secret_access_key="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",
+        aws_access_key_id="XXXX",
+        aws_secret_access_key="XXX",
         region_name="us-west-1",
     )
     s3_client.delete_object(Bucket="gbfs-data", Key=fname)
