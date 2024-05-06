@@ -1,11 +1,13 @@
 """application/__init__.py."""
-from threading import Thread
-from datetime import datetime
-import yaml
-from flask import Flask, jsonify, request, abort
-from src.scheduling.cron_jobs import main_fn
-from src.mailing.sender import email_sender
 
+from datetime import datetime
+from threading import Thread
+
+import yaml
+from flask import Flask, abort, jsonify, request
+
+from bms.mailing.sender import email_sender
+from bms.scheduling.cron_jobs import main_fn
 
 DEFAULT_CONFIG = "config/config.yaml"
 
