@@ -3,6 +3,7 @@ venv/
 **/.pytest_cache
 **/*.egg-info
 **/__pycache__
+build/
 .ipynb_checkpoints
 new_user_credentials_cc.csv
 .DS_Store

@@ -1,10 +1,12 @@
 """Elements to send the email"""
-import os
-import ssl
-import smtplib
-import yaml
-import src.data.core as dc
 
+import os
+import smtplib
+import ssl
+
+import yaml
+
+import bms.data.core as dc
 
 if not os.environ.get("EMAIL_PASSWORD"):
     with open("config/local_config.yaml", "rb") as config_file:

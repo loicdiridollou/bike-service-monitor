@@ -19,20 +19,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install -e src
+          pip install -e .
       - name: "Linting"
         run: |
-          pylint src; pylint application
+          pylint bms; pylint application
       - name: "Testing"
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
-          pytest src
+          pytest bms
       - name: Code coverage
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
-          coverage run -m --source application,src pytest src application;
+          coverage run -m --source application,bms pytest bms application;
           coverage json --omit="**/tests/*"
           VARIABLE=$(python -c "import json; print(str(round(json.load(open('coverage.json', 'rb'))['totals']['percent_covered'], 2))+'%')")
           echo "name=total::$VARIABLE" >> $GITHUB_OUTPUT

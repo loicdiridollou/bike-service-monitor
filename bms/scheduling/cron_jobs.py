@@ -1,11 +1,13 @@
 """File containing the cron jobs setup"""
+
 from time import sleep
+
+import pandas as pd
 import yaml
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
-import pandas as pd
-from src.mailing.sender import email_sender
 
+from bms.mailing.sender import email_sender
 
 DEFAULT_CONFIG = "config/config.yaml"
 

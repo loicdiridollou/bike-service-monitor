@@ -1,8 +1,9 @@
 """Test functions for the mailing.sender module."""
+
 import pytest
 
-import src.mailing.sender as ms
-import src.mailing.ses_sender as mses
+import bms.mailing.sender as ms
+import bms.mailing.ses_sender as mses
 
 
 @pytest.mark.skip(reason="Password issues")
