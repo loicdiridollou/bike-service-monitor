@@ -27,9 +27,7 @@ def email_sender(message=None, stations=None, test_mode=False):
 
                   """
         message += "\n"
-        message += (
-            "This is the state of the near-by station of 199 New Montgomery St.\n"
-        )
+        message += "This is the state of the near-by station of 199 New Montgomery St.\n"
 
         values = dc.get_results(stations)
         for elem in values:

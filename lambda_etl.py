@@ -55,10 +55,7 @@ def get_timestamps():
         )
     )
     with engine.connect() as conn:
-        cmd = (
-            "SELECT DISTINCT timestamp FROM public.stations_status"
-            "ORDER BY timestamp ASC;"
-        )
+        cmd = "SELECT DISTINCT timestamp FROM public.stations_status" "ORDER BY timestamp ASC;"
         rs = conn.execute(cmd)  # type: ignore
 
     tab = []
