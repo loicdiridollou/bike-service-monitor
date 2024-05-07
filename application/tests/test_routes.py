@@ -1,4 +1,5 @@
 """Testing the different routes of the application"""
+
 import pytest
 from application import create_app
 

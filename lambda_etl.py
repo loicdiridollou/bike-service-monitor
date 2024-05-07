@@ -1,4 +1,5 @@
 """Module for lambda to process data."""
+
 import datetime
 import sqlalchemy as sq
 import boto3

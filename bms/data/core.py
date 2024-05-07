@@ -1,5 +1,7 @@
 """Core module of the data workflow."""
 
+from typing import overload
+
 import pandas as pd
 import requests
 
@@ -12,7 +14,15 @@ FIELDS = [
 ]
 
 
-def station_status(station_ids=None):
+@overload
+def station_status(stations_ids: list) -> pd.DataFrame: ...
+
+
+@overload
+def station_status(stations_ids: None) -> pd.Series: ...
+
+
+def station_status(station_ids: list | None = None) -> pd.DataFrame | pd.Series:
     """Retrieve the status of all the stations."""
     url = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
     source = requests.get(url, timeout=100).json()

@@ -1,4 +1,5 @@
 """Encapsulation of SES email notification."""
+
 import boto3
 from botocore.exceptions import ClientError
 
