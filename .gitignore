@@ -8,3 +8,4 @@ build/
 new_user_credentials_cc.csv
 .DS_Store
 *.zip
+.coverage

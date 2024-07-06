@@ -20,6 +20,7 @@ dependencies = [
   "pyyaml",
   "apscheduler",
   "requests",
+  "coverage",
   "numpy",
   "flask",
   "pytest",
