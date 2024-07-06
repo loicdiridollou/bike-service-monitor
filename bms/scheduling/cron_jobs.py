@@ -1,5 +1,6 @@
-"""File containing the cron jobs setup"""
+"""File containing the cron jobs setup."""
 
+from pathlib import Path
 from time import sleep
 
 import pandas as pd
@@ -9,12 +10,12 @@ from apscheduler.triggers.cron import CronTrigger
 
 from bms.mailing.sender import email_sender
 
-DEFAULT_CONFIG = "config/config.yaml"
+DEFAULT_CONFIG = Path("config/config.yaml")
 
 
 def main_fn(config_fn=DEFAULT_CONFIG):
-    """Generator of cron jobs"""
-    with open(config_fn, "rb") as config_file:
+    """Generate method for ron jobs."""
+    with config_fn.open("rb") as config_file:
         cron_times = yaml.full_load(config_file)["cron_times"]
 
     scheduler = BackgroundScheduler()

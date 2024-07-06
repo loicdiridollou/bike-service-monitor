@@ -4,7 +4,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-def send_email(recipients=[]):
+def send_email(recipients: list):
     """Provide main encapsulation."""
     AWS_REGION = "us-west-1"
     client = boto3.client("ses", region_name=AWS_REGION)

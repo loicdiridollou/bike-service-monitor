@@ -1,6 +1,7 @@
-"""Testing the different routes of the application"""
+"""Testing the different routes of the application."""
 
 import pytest
+
 from application import create_app
 
 # pylint: disable=W0621
@@ -8,7 +9,7 @@ from application import create_app
 
 @pytest.fixture
 def client():
-    """Defining client fixture"""
+    """Define client fixture."""
     app = create_app({"TESTING": True})
 
     with app.test_client() as client_fixt:
@@ -16,31 +17,31 @@ def client():
 
 
 def test_landing(client):
-    """Testing landing page route"""
+    """Test landing page route."""
     request = client.get("/")
     assert {"message": "healthy"} == request.get_json()
 
 
 def test_time(client):
-    """Testing time route"""
+    """Test time route."""
     request = client.get("/time")
     assert request.status_code == 200
     assert isinstance(request.get_json()["time"], str)
 
 
 def test_times(client):
-    """Testing times route"""
+    """Test times route."""
     request = client.get("/times")
     assert request.status_code == 200
 
 
 def test_error404(client):
-    """Testing error handler 404"""
+    """Test error handler 404."""
     request = client.get("/timegcbrrs")
     assert request.status_code == 404
 
 
 def test_error400(client):
-    """Testing error handler 400"""
+    """Test error handler 400."""
     request = client.delete("/times/gcbrrs")
     assert request.status_code == 400

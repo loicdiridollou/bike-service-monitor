@@ -1,6 +1,7 @@
 """application/__init__.py."""
 
 from datetime import datetime
+from pathlib import Path
 from threading import Thread
 
 import yaml
@@ -21,6 +22,7 @@ def create_app(test_config=None):
     """Creating the app and db"""
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(SECRET_KEY="dev")
+    config_path = Path("config/config.yaml")
 
     if test_config is None:
         app.config.from_pyfile("config.py", silent=True)
@@ -42,7 +44,7 @@ def create_app(test_config=None):
 
     @app.route("/times")
     def list_times():
-        with open("config/config.yaml", "r", encoding="utf-8") as config_file:
+        with config_path.open("r", encoding="utf-8") as config_file:
             cron_times = yaml.full_load(config_file)["cron_times"]
         return jsonify({"message": "success", "times": cron_times}), 200
 
@@ -51,27 +53,27 @@ def create_app(test_config=None):
         body = request.get_json()
         if body is None:
             abort(400)
-        with open(config_fn, "r", encoding="utf-8") as config_file:
+        with config_path.open("r", encoding="utf-8") as config_file:
             config_data = yaml.full_load(config_file)
         names = sorted(config_data["cron_times"].keys())
         new_num = int(names[-1][4:]) + 1
         config_data["cron_times"]["time" + str(new_num)] = body
 
-        with open(config_fn, "w", encoding="utf-8") as config_file:
+        with config_path.open("w", encoding="utf-8") as config_file:
             yaml.dump(config_data, config_file)
 
         return jsonify({"message": "succes"}), 200
 
     @app.route("/times/<time_name>", methods=["DELETE"])
     def delete_times(time_name, config_fn=DEFAULT_CONFIG):
-        with open(config_fn, "r", encoding="utf-8") as config_file:
+        with config_path.open("r", encoding="utf-8") as config_file:
             config_data = yaml.full_load(config_file)
         names = config_data["cron_times"]
         if time_name not in names:
             abort(400)
         del config_data["cron_times"][time_name]
 
-        with open(config_fn, "w", encoding="utf-8") as config_file:
+        with config_path.open("w", encoding="utf-8") as config_file:
             yaml.dump(config_data, config_file)
 
         return jsonify({"message": "succes", "deleted_time": time_name}), 200

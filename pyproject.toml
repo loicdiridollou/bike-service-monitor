@@ -1,3 +1,39 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bms"
+version = "0.0.1"
+description = "Package source of the different modules"
+authors = [
+    {name = "Loic Diridollou", email = "l.d@outlook.com"},
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "matplotlib",
+  "boto3",
+  "pyyaml",
+  "apscheduler",
+  "requests",
+  "numpy",
+  "flask",
+  "pytest",
+  "pandas",
+  "seaborn",
+]
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests"]
+namespaces = false # Disable implicit namespaces
+
+
 [tool.ruff]
 line-length = 100
 
@@ -24,6 +60,10 @@ select = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"application/**/__init__.py" = ["D"]
+"bms/**/__init__.py" = ["D"]
 
 [tool.ruff.format]
 quote-style = "double"

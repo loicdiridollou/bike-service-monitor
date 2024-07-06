@@ -1,26 +1,27 @@
-"""Elements to send the email"""
+"""Elements to send the email."""
 
 import os
 import smtplib
 import ssl
+from pathlib import Path
 
 import yaml
 
 import bms.data.core as dc
 
 if not os.environ.get("EMAIL_PASSWORD"):
-    with open("config/local_config.yaml", "rb") as config_file:
+    with Path("config/local_config.yaml").open("rb") as config_file:
         config = yaml.full_load(config_file)["data"]
         os.environ.update(config)
 
 
 def email_sender(message=None, stations=None, test_mode=False):
-    """Function to send email"""
+    """Send email."""
     port = 465
     smtp_server = "smtp.gmail.com"
     sender_email = "ld.app.testing@gmail.com"
     receiver_email = "loic.diridollou@gmail.com"
-    password = os.environ.get("EMAIL_PASSWORD")
+    password = os.environ.get("EMAIL_PASSWORD") or ""
 
     if not message:
         message = """Bike Service Notification

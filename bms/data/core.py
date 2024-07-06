@@ -15,11 +15,11 @@ FIELDS = [
 
 
 @overload
-def station_status(stations_ids: list) -> pd.DataFrame: ...
+def station_status(station_ids: list) -> pd.DataFrame: ...
 
 
 @overload
-def station_status(stations_ids: None) -> pd.Series: ...
+def station_status(station_ids: None = None) -> pd.Series: ...
 
 
 def station_status(station_ids: list | None = None) -> pd.DataFrame | pd.Series:
@@ -27,7 +27,7 @@ def station_status(station_ids: list | None = None) -> pd.DataFrame | pd.Series:
     url = "https://gbfs.baywheels.com/gbfs/en/station_status.json"
     source = requests.get(url, timeout=100).json()
     status_df = pd.DataFrame(source["data"]["stations"])
-    station_ids = station_ids or status_df["station_id"].unique()
+    station_ids = station_ids or list(status_df["station_id"].unique())
     return status_df.loc[status_df["station_id"].isin(station_ids)]
 
 
@@ -36,7 +36,7 @@ def station_information(station_ids=None):
     url = "https://gbfs.baywheels.com/gbfs/en/station_information.json"
     source = requests.get(url, timeout=100).json()
     information_df = pd.DataFrame(source["data"]["stations"])
-    station_ids = station_ids or information_df["station_id"].unique()
+    station_ids = station_ids or list(information_df["station_id"].unique())
     return information_df.loc[information_df["station_id"].isin(station_ids)]
 
 
