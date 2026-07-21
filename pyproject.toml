@@ -28,6 +28,11 @@ dependencies = [
   "seaborn",
 ]
 
+[dependency-groups]
+dev = [
+  "pylint",
+  "ruff",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
